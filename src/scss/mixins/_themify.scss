@@ -1,0 +1,21 @@
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+
+      $theme-name: $theme !global;
+      @content;
+      $theme-name: null !global;
+      $theme-map: null !global;
+    }
+  }
+}

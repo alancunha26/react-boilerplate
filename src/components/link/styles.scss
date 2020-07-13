@@ -1,0 +1,14 @@
+@import '../../scss/variables';
+
+a.link {
+  font-size: 1rem;
+  text-decoration: none;
+  // color: $black;
+  // transition: color 0.15s ease-in-out;
+  display: block;
+
+  &:hover {
+    text-decoration: underline;
+    // color: darken($color: $black, $amount: 10%);
+  }
+}

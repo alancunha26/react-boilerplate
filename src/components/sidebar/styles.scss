@@ -1,0 +1,238 @@
+@import '../../scss/index.scss';
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  z-index: 1000;
+  box-shadow: 7px 3px 10px -10px rgba(0, 0, 0, 0.75);
+  position: relative;
+  width: 20vw;
+  transition: $transitions-duration ease-in-out;
+
+  .side-bar__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+
+    .button {
+      min-width: $side-bar-item-size;
+    }
+  }
+
+  .side-bar__center {
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100%;
+    top: 50%;
+
+    .side-bar__indicator {
+      transition: transform $transitions-duration ease-in-out,
+        background-color $transitions-duration ease-in-out;
+      pointer-events: none;
+      position: absolute;
+      height: $side-bar-item-size;
+      width: 6px;
+      right: 0;
+      top: 0;
+
+      @include themify {
+        background-color: themed('sideBarText');
+      }
+    }
+
+    ul.side-bar__list {
+      width: 100%;
+
+      li.side-bar__item {
+        cursor: pointer;
+        font-weight: 500;
+        transition: $transitions-duration ease-in-out background-color;
+
+        @include themify() {
+          color: rgba(themed('sideBarText'), 0.8);
+          background-color: lighten-darken(
+            $color: themed('sideBarBackground'),
+            $amount: 10
+          );
+        }
+
+        .link {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          height: $side-bar-item-size;
+          padding: 0 $side-bar-item-padding;
+          color: inherit;
+        }
+
+        .side-bar__itemIcon {
+          margin-right: 1rem;
+          transition: $transitions-duration ease-in-out;
+
+          svg {
+            width: $side-bar-item-icon-size;
+            height: $side-bar-item-icon-size;
+            transform: translateY(3px);
+            fill: currentColor;
+          }
+        }
+
+        .side-bar__itemText {
+          transition: $transitions-duration ease-in-out;
+          white-space: nowrap;
+          font-size: 1rem;
+        }
+
+        &:hover {
+          @include themify() {
+            background-color: lighten-darken(
+              $color: themed('sideBarBackground'),
+              $amount: 15
+            );
+          }
+
+          .link {
+            text-decoration: none;
+          }
+        }
+
+        &:not(:disabled):active {
+          @include themify() {
+            color: rgba(themed('sideBarText'), 1);
+            background-color: lighten-darken(
+              $color: themed('sideBarBackground'),
+              $amount: 20
+            );
+          }
+        }
+      }
+    }
+  }
+
+  .side-bar__footer {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+    transition: opacity $transitions-duration ease-in-out;
+
+    small {
+      font-size: 0.875rem;
+      color: inherit;
+    }
+  }
+
+  // Creates the indexes for indicator
+  @for $i from 0 through 5 {
+    &.side-bar--index-#{$i} {
+      // is route selected
+      ul.side-bar__list li.side-bar__item:nth-child(#{$i + 1}) {
+        @include themify() {
+          color: rgba(themed('sideBarText'), 1);
+          background-color: lighten-darken(
+            $color: themed('sideBarBackground'),
+            $amount: 15
+          );
+        }
+      }
+
+      .side-bar__indicator {
+        transform: translateY($i * 100%);
+      }
+    }
+  }
+
+  // Colorizing
+  @include themify() {
+    background-color: themed('sideBarBackground');
+    color: themed('sideBarText');
+  }
+
+  // Only desktop
+  @include media-breakpoint-up(md) {
+    &.side-bar--closed {
+      width: $side-bar-item-size;
+
+      .side-bar__header {
+        align-items: center;
+
+        .button:last-child {
+          transform: translate(
+            -$side-bar-item-size,
+            calc(#{$side-bar-item-icon-size} + 1rem)
+          );
+        }
+      }
+
+      .side-bar__center ul.side-bar__list li.side-bar__item {
+        .side-bar__itemIcon {
+          margin-right: 0;
+          transform: translateX(
+            calc(
+              (#{$side-bar-item-size / 2} - #{$side-bar-item-padding}) - #{$side-bar-item-icon-size /
+                2}
+            )
+          );
+        }
+
+        .side-bar__itemText {
+          opacity: 0;
+        }
+      }
+
+      .side-bar__footer {
+        opacity: 0;
+      }
+    }
+  }
+
+  // Only mobile
+  @include media-breakpoint-down(sm) {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+    max-height: $side-bar-item-size;
+
+    .side-bar__header {
+      display: none;
+    }
+
+    .side-bar__center {
+      .side-bar__indicator {
+        display: none;
+      }
+
+      ul.side-bar__list {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        li.side-bar__item {
+          width: auto;
+          flex: 1;
+
+          .link {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .side-bar__itemIcon {
+            margin-right: 0;
+          }
+
+          .side-bar__itemText {
+            font-size: 0.675rem;
+          }
+        }
+      }
+    }
+
+    .side-bar__footer {
+      display: none;
+    }
+  }
+}

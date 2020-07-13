@@ -1,0 +1,23 @@
+@import '../../scss/index.scss';
+
+.default-template {
+  position: relative;
+  display: flex;
+  height: 100vh;
+
+  .default-template__content {
+    transition: background-color $transitions-duration ease-in-out;
+    padding: 1rem;
+    flex: 1;
+  }
+
+  @include themify {
+    .default-template__content {
+      background-color: themed('background');
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-bottom: $side-bar-item-size;
+  }
+}

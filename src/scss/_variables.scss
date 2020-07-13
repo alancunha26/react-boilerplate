@@ -1,0 +1,221 @@
+/**
+|--------------------------------------------------
+| Color System
+|--------------------------------------------------
+*/
+$green: #1ad274 !default;
+$green-2: #5ddb8d !default;
+$green-3: #0a914b !default;
+
+$red: #f86761 !default;
+$red-2: #ff5050 !default;
+$red-3: #d32c19 !default;
+
+$yellow: #ffd755 !default;
+$yellow-2: #f7c137 !default;
+$yellow-3: #dfa921 !default;
+
+/**
+|--------------------------------------------------
+| Grayscale Color System
+|--------------------------------------------------
+*/
+$white: #ffffff !default;
+$gray: #e0e0e0 !default;
+$gray-2: #a2a8ae !default;
+$gray-3: #a8a8a8 !default;
+$gray-4: #a0a0a0 !default;
+$gray-5: #6c6c6c !default;
+$gray-6: #4c4c4c !default;
+$gray-7: #4b4b4b !default;
+$black: #373737 !default;
+$black-2: #272727 !default;
+$black-3: #242424 !default;
+$black-4: #212121 !default;
+$black-5: #1e1e1e !default;
+$black-6: #1d1d1d !default;
+$black-7: #121212 !default;
+$dark: #000000 !default;
+
+/**
+|--------------------------------------------------
+| Themes
+|--------------------------------------------------
+*/
+$themes: (
+  default: (
+    'green': $green,
+    'red': $red,
+    'yellow': $yellow,
+    'background': $gray,
+    'foreground': $white,
+    'sideBarText': $white,
+    'sideBarBackground': $green,
+  ),
+  dark: (
+    'green': $green-2,
+    'red': $red-2,
+    'yellow': $yellow-2,
+    'background': $black-7,
+    'foreground': $black-5,
+    'sideBarText': $green,
+    'sideBarBackground': $black-5,
+  ),
+);
+
+/**
+|--------------------------------------------------
+| Theme colors array
+|--------------------------------------------------
+*/
+$theme-colors: (
+  'green': $green,
+  'green-2': $green-2,
+  'green-3': $green-3,
+  'red': $red,
+  'red-2': $red-2,
+  'red-3': $red-3,
+  'yellow': $yellow,
+  'yellow-2': $yellow-2,
+  'yellow-3': $yellow-3,
+);
+
+$theme-gray-scale: (
+  'white': $white,
+  'black': $black,
+  'black-2': $black-2,
+  'black-3': $black-3,
+  'black-4': $black-4,
+  'black-5': $black-5,
+  'black-6': $black-6,
+  'black-7': $black-7,
+  'gray': $gray,
+  'gray-2': $gray-2,
+  'gray-3': $gray-3,
+  'gray-4': $gray-4,
+  'gray-5': $gray-5,
+  'gray-6': $gray-6,
+  'gray-7': $gray-7,
+);
+
+/**
+|--------------------------------------------------
+| Yiq colors
+|--------------------------------------------------
+*/
+$yiq-contrasted-threshold: 175 !default;
+$yiq-text-dark: $black !default;
+$yiq-text-light: $white !default;
+
+/**
+|--------------------------------------------------
+| Fonts
+|--------------------------------------------------
+*/
+$font-style: normal;
+$font-weight: 400 !default;
+$font-line-height: 1.5 !default;
+$font-size: 16px !default;
+$font-family: 'circularstd', 'Poppins', sans-serif !default;
+
+/**
+|--------------------------------------------------
+| Animations
+|--------------------------------------------------
+*/
+$transitions-duration: 0.15s;
+
+/**
+|--------------------------------------------------
+| Touchable scale
+|--------------------------------------------------
+*/
+$touchable-scale-transition: transform $transitions-duration ease-in-out;
+$touchable-scale-influence: 0.95;
+
+/**
+|--------------------------------------------------
+| Grid
+|--------------------------------------------------
+*/
+$grid-breakpoint-xs: 0 !default;
+$grid-breakpoint-sm: 576px !default;
+$grid-breakpoint-md: 768px !default;
+$grid-breakpoint-lg: 992px !default;
+$grid-breakpoint-xl: 1200px !default;
+
+$grid-breakpoints: (
+  xs: $grid-breakpoint-xs,
+  sm: $grid-breakpoint-sm,
+  md: $grid-breakpoint-md,
+  lg: $grid-breakpoint-lg,
+  xl: $grid-breakpoint-xl,
+) !default;
+
+$grid-width: 1080px !default;
+$grid-width-xs: 1080px !default;
+$grid-width-sm: 1080px !default;
+$grid-width-md: 1080px !default;
+$grid-width-lg: 1080px !default;
+$grid-width-xl: 1080px !default;
+
+$grid-widths: (
+  xs: $grid-width-xs,
+  sm: $grid-width-sm,
+  md: $grid-width-md,
+  lg: $grid-width-lg,
+  xl: $grid-width-xl,
+) !default;
+
+$grid-columns: 12 !default;
+
+/**
+|--------------------------------------------------
+| Navbar / Sidebar
+|--------------------------------------------------
+*/
+$side-bar-collapse-animation-duration: 1s;
+$side-bar-item-size: 65px;
+$side-bar-item-padding: 1rem;
+$side-bar-item-icon-size: 25px;
+
+/**
+|--------------------------------------------------
+| z-index
+|--------------------------------------------------
+*/
+$zindex-dropdown: 1000 !default;
+$zindex-sticky: 1020 !default;
+$zindex-fixed: 1030 !default;
+$zindex-modal-backdrop: 1040 !default;
+$zindex-modal: 1050 !default;
+$zindex-popover: 1060 !default;
+$zindex-tooltip: 1070 !default;
+
+/**
+|--------------------------------------------------
+| text-field
+|--------------------------------------------------
+*/
+$text-field-active-color: $green !default;
+
+/**
+|--------------------------------------------------
+| Exporters
+|--------------------------------------------------
+*/
+:export {
+  // @each $key, $value in $theme-colors {
+  //   #{unquote($key)}: $value;
+  // }
+
+  // @each $key, $value in $theme-gray-scale {
+  //   #{unquote($key)}: $value;
+  // }
+
+  @each $theme, $map in $themes {
+    @each $key, $submap in $map {
+      #{unquote(#{$theme}-#{$key})}: $submap;
+    }
+  }
+}

@@ -1,0 +1,154 @@
+@import '../../scss/index';
+
+/**
+|--------------------------------------------------
+| Default
+|--------------------------------------------------
+*/
+.button,
+a.button {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform ease-in-out $transitions-duration,
+    color $transitions-duration ease-in-out,
+    background-color $transitions-duration ease-in-out,
+    border-color $transitions-duration ease-in-out,
+    box-shadow $transitions-duration ease-in-out;
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    &.link {
+      text-decoration: none;
+    }
+  }
+
+  @include themify {
+    @each $key, $color in $theme-map {
+      $darken-color: darken($color, 10);
+
+      &.button--theme-#{$key} {
+        color: color-yiq($color);
+        border-color: $color;
+        background-color: $color;
+
+        &:hover {
+          color: color-yiq($darken-color);
+          border-color: $darken-color;
+          background-color: $darken-color;
+        }
+
+        // Disabled comes first so active can properly restyle
+        &:disabled {
+          color: color-yiq($color);
+          background-color: $color;
+          border-color: $color;
+        }
+
+        &:not(:disabled):active {
+          color: color-yiq(darken($color, 10%));
+          background-color: darken($color, 10%);
+          border-color: darken($color, 10%);
+        }
+      }
+
+      &.button--transparent.button--theme-#{$key} {
+        color: $color;
+        border: none;
+        background-color: transparent;
+
+        &:hover {
+          color: rgba($color, 0.6);
+          background-color: transparent;
+          border: none;
+        }
+
+        // Disabled comes first so active can properly restyle
+        &:disabled {
+          color: $color;
+          background-color: transparent;
+          border: none;
+        }
+
+        &:not(:disabled):active {
+          color: rgba($color, 0.3);
+          background-color: transparent;
+          border: none;
+        }
+      }
+    }
+  }
+
+  @include touchable-scale(false);
+}
+
+/**
+|--------------------------------------------------
+| Sizing
+|--------------------------------------------------
+*/
+.button--size-small,
+a.button--size-small {
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.button--size-medium,
+a.button--size-medium {
+  padding: 0.75rem 3rem;
+  border-radius: 2rem;
+}
+
+.button--size-large,
+a.button--size-large {
+  padding: 1.25rem 4rem;
+  border-radius: 3rem;
+}
+
+/**
+|--------------------------------------------------
+| Typing
+|--------------------------------------------------
+*/
+.button--block,
+a.button--block {
+  display: block;
+  width: 100%;
+}
+
+.button--rounded,
+a.button--rounded {
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.button--size-small {
+    padding: 0.5rem;
+  }
+
+  &.button--size-medium {
+    width: 48px;
+    height: 48px;
+  }
+
+  &.button--size-large {
+    width: 64px;
+    height: 64px;
+  }
+}

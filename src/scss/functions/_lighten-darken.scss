@@ -1,0 +1,7 @@
+@function lighten-darken($color, $amount: 0) {
+  @if $theme-name == 'dark' {
+    @return lighten($color, $amount);
+  } @else {
+    @return darken($color, $amount);
+  }
+}
